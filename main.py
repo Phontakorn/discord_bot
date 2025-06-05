@@ -40,12 +40,20 @@ async def testhello(interaction):
 
 @bot.tree.command(name='name')
 @app_commands.describe(name ="What's your name?")
-async def sendname(interaction, name : str):
-    emmbed = discord.Embed(title=f'Welcome : {name}',
-                           color=0xFFBDC2,
-                           timestamp=discord.utils.utcnow())
-    await interaction.response.send_message(embed = emmbed)
-    await interaction.add_roles(1380243560594673684)
+async def sendname(interaction: discord.Interaction, name: str):
+    embed = discord.Embed(
+        title=f"Welcome : {name}",
+        color=0xFFBDC2,
+        timestamp=discord.utils.utcnow()
+    )
 
+    await interaction.response.send_message(embed=embed)
+
+    # ดึง member จาก interaction.user
+    member = interaction.user
+    if isinstance(member, discord.Member):
+        role = interaction.guild.get_role(1380243560594673684)
+        if role:
+            await member.add_roles(role)
 server_on()
 bot.run(os.getenv('TOKEN'))
