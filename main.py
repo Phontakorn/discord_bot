@@ -34,10 +34,6 @@ async def on_member_remove(member):
 
     await channel.send(embed = emmbed)
 
-@bot.command()
-async def test(ctx):
-    await ctx.send(f"Hello Test : {ctx.author.name}")
-
 @bot.tree.command(name='testhello', description='Show text hello')
 async def testhello(interaction):
     await interaction.response.send_message('Hello Testing!')
@@ -49,6 +45,7 @@ async def sendname(interaction, name : str):
                            color=0xFFBDC2,
                            timestamp=discord.utils.utcnow())
     await interaction.response.send_message(embed = emmbed)
+    await interaction.add_roles(1380243560594673684)
 
 server_on()
 bot.run(os.getenv('TOKEN'))
